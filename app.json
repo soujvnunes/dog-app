@@ -26,7 +26,9 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./src/assets/favicon.ico"
+    },
+    "description": "Consult all dog breeds by filter or pagination and checking interesting informations about it, such as its weight or origin.",
+    "githubUrl": "https://github.com/soujvnunes/the-dog-app"
   }
 }
