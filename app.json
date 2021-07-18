@@ -4,7 +4,7 @@
     "slug": "the-dog-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon.jpg",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -13,9 +13,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -26,7 +24,7 @@
       }
     },
     "web": {
-      "favicon": "./src/assets/favicon.ico"
+      "favicon": "./assets/favicon.ico"
     },
     "description": "Consult all dog breeds by filter or pagination and checking interesting informations about it, such as its weight or origin.",
     "githubUrl": "https://github.com/soujvnunes/the-dog-app"
