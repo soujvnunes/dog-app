@@ -12,17 +12,18 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 2,
-    borderColor: Collections.theme.palette.type.light.normal,
+    borderColor: Collections.theme.palette.type.dark.normal,
     borderRadius: 8,
   },
+  isFocused: {
+    borderColor: Collections.theme.palette.type.dark.high,
+  },
   icon: {
-    color: Collections.theme.palette.type.light.normal,
     marginRight: 8,
   },
   input: {
     textTransform: "uppercase",
     fontWeight: "bold",
-    color: Collections.theme.palette.type.light.normal,
     height: 40,
     flex: 1,
   },
@@ -30,16 +31,25 @@ const styles = StyleSheet.create({
 
 export default function Filter() {
   const [query, setQuery] = useState<string>("");
+  const [isFocused, setIsFocused] = useState<boolean>(false);
 
   return (
-    <View style={styles.root}>
-      <Icon style={styles.icon}>filter</Icon>
+    <View style={[styles.root, isFocused && styles.isFocused]}>
+      <Icon
+        style={styles.icon}
+        color={isFocused ? "textPrimary" : "textSecondary"}>
+        filter
+      </Icon>
       <TextInput
         value={query}
         placeholder="Filter"
         onChangeText={setQuery}
         style={styles.input}
-        placeholderTextColor={Collections.theme.palette.type.light.normal}
+        placeholderTextColor={
+          Collections.theme.palette.type.dark[isFocused ? "high" : "normal"]
+        }
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
     </View>
   );

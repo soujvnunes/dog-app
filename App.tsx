@@ -17,7 +17,7 @@ export default function App(): JSX.Element {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <StatusBar style="light" />
+        <StatusBar style="auto" />
         <Stack.Navigator>
           <Stack.Screen name="Home" component={Home} options={options} />
           <Stack.Screen name="Breed" component={Breed} options={options} />
