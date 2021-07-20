@@ -10,4 +10,7 @@ export default {
       color,
     };
   },
+  inset(value: number | string) {
+    return { top: value, left: value, right: value, bottom: value };
+  },
 };

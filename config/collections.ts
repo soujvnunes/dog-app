@@ -59,5 +59,8 @@ export default {
         span: 12,
       },
     },
+    metrics: {
+      spacing: 8,
+    },
   },
 };
