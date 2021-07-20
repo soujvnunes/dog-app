@@ -1,6 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, ViewProps } from "react-native";
-import { Icon } from "../components";
+import { StyleSheet, View, ViewProps } from "react-native";
+import { Icon, Text } from "../components";
 import { Collections } from "../config";
 
 interface Props extends ViewProps {
@@ -22,12 +22,6 @@ const styles = StyleSheet.create({
   icon: {
     marginRight: Collections.theme.metrics.spacing,
   },
-  title: {
-    fontWeight: "bold",
-    textTransform: "uppercase",
-    color: Collections.theme.palette.type.dark.normal,
-    fontSize: 14,
-  },
   row: {
     flexDirection: "row",
     alignItems: "center",
@@ -46,10 +40,10 @@ export default function SectionListItem({
         <Icon style={styles.icon} color="textSecondary">
           {icon}
         </Icon>
-        <Text style={styles.title}>{primary}</Text>
+        <Text variant="label">{primary}</Text>
       </View>
       <View style={styles.content}>
-        <Text>{secondary}</Text>
+        <Text color="textPrimary">{secondary}</Text>
       </View>
     </View>
   );
