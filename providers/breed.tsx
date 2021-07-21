@@ -14,6 +14,7 @@ type State = {
 };
 
 const data = {
+  name: "",
   uri: "",
   weight: "",
   origin: "",

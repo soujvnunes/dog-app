@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { Grid, GridItem, SafeAreaView } from "../components";
 import { Api } from "../config";
-import { Box } from "../containers";
+import { Box, Filter } from "../containers";
 import { Breed } from "../providers";
 
 export default function Home() {
@@ -31,27 +31,28 @@ export default function Home() {
   function handlePressBox(breed: any) {
     navigation.navigate("Breed");
     handleSet({
+      name: breed.name,
       uri: breed.image.url,
       weight: breed.weight.metric,
-      origin: breed["country_code"],
       lifeSpan: breed["life_span"],
       bredFor: breed["bred_for"],
       temperament: breed.temperament,
-      wikipedia: "",
     });
   }
 
   return (
-    <ScrollView>
-      <SafeAreaView>
-        <Grid>
-          {breeds.map((breed: any) => (
-            <GridItem key={breed.name}>
-              <Box breed={breed} onPress={() => handlePressBox(breed)} />
-            </GridItem>
-          ))}
-        </Grid>
-      </SafeAreaView>
-    </ScrollView>
+    <>
+      <ScrollView>
+        <SafeAreaView>
+          <Grid>
+            {breeds.map((breed: any) => (
+              <GridItem key={breed.name}>
+                <Box breed={breed} onPress={() => handlePressBox(breed)} />
+              </GridItem>
+            ))}
+          </Grid>
+        </SafeAreaView>
+      </ScrollView>
+    </>
   );
 }

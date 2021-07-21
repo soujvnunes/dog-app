@@ -1,9 +1,11 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Image, StyleSheet, Text, Dimensions, Linking } from "react-native";
+import { useEffect } from "react";
+import { Image, StyleSheet, Text, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "../components";
 import { Collections } from "../config";
-import { Tape, Button } from "../containers";
+import { Tape } from "../containers";
 import { Breed as BreedTree } from "../providers";
 
 const styles = StyleSheet.create({
@@ -21,13 +23,14 @@ const styles = StyleSheet.create({
 });
 
 export default function Breed() {
+  const navigation = useNavigation();
   const { data } = BreedTree.Consumer();
   const renderTapes = [
     { icon: "weight", primary: "weight", secondary: `${data.weight} kg` },
     {
-      icon: "origin",
-      primary: "origin",
-      secondary: data.origin,
+      icon: "lifeSpan",
+      primary: "life span",
+      secondary: data.lifeSpan,
     },
   ].map(({ icon, primary, secondary }) => (
     <Tape
@@ -38,6 +41,10 @@ export default function Breed() {
       secondary={secondary}
     />
   ));
+
+  useEffect(() => {
+    navigation.setOptions({ title: data.name });
+  }, [data]);
 
   console.log(data);
 
@@ -52,12 +59,11 @@ export default function Breed() {
         />
         {renderTapes}
         <Text style={styles.text}>
-          Also known as _alt_names_, the name breed is a kind of _temperament_,
-          being able for _bred_for_.
+          The {data.name} breed is kind of {data.temperament.toLowerCase()}
+          {data.bredFor
+            ? `, being able for ${data.bredFor.toLowerCase()}.`
+            : "."}
         </Text>
-        <Button onPress={() => Linking.openURL(data.wikipedia)} icon="extern">
-          Know more
-        </Button>
       </SafeAreaView>
     </ScrollView>
   );
