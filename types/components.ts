@@ -8,7 +8,15 @@ export interface Button extends TouchableOpacityProps {
   children: ReactNode;
 }
 export interface Icon extends SvgProps {
-  children: "logo" | "filter" | "weight" | "origin" | "extern" | string;
+  children:
+    | "logo"
+    | "filter"
+    | "weight"
+    | "origin"
+    | "extern"
+    | "lifeSpan"
+    | "chevron"
+    | string;
   color?: "main" | "accent" | "textPrimary" | "textSecondary" | "textTertiary";
   size?: "smaller" | "small" | "medium" | "large" | "larger";
 }
@@ -19,4 +27,10 @@ export interface SafeAreaView extends SafeAreaViewProps {}
 export interface Text extends TextProps {
   variant?: "text" | "label";
   color?: Icon["color"];
+}
+export interface Box extends TouchableOpacityProps {
+  breed: {
+    name: string;
+    image: { url: string };
+  };
 }
