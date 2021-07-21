@@ -1,6 +1,5 @@
-import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
+import React, { forwardRef } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -8,6 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Collections, Modules } from "../config";
+import { Box as BoxProps } from "../types/components";
 
 const styles = StyleSheet.create({
   root: {
@@ -31,20 +31,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Box({
-  breed: {
-    name,
-    image: { url: uri },
+const Box = forwardRef<any, BoxProps>(function Box(
+  {
+    breed: {
+      name,
+      image: { url: uri },
+    },
+    ...props
   },
-}: any) {
-  const navigation = useNavigation();
-
-  function handlePress() {
-    navigation.navigate("Breed");
-  }
-
+  ref,
+) {
   return (
-    <TouchableOpacity style={styles.root} onPress={handlePress}>
+    <TouchableOpacity ref={ref} style={styles.root} {...props}>
       <ImageBackground source={{ uri }} resizeMode="cover" style={styles.image}>
         <LinearGradient
           style={styles.gradient}
@@ -56,4 +54,7 @@ export default function Box({
       </ImageBackground>
     </TouchableOpacity>
   );
-}
+});
+
+Box.displayName = "Box";
+export default Box;
