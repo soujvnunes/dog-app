@@ -6,8 +6,9 @@ import { useState } from "react";
 
 const styles = StyleSheet.create({
   root: {
+    minWidth: "100%",
     paddingHorizontal: 8,
-    height: 40,
+    height: 36,
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
