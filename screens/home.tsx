@@ -18,7 +18,13 @@ export default function Home() {
       isMounted.current = true;
 
       if (isMounted.current) {
-        setBreeds(await Api.getBreed());
+        try {
+          const breed = await Api.getBreed();
+
+          setBreeds(breed);
+        } catch (error) {
+          console.log("Home getBreed", error);
+        }
       }
     })();
 
