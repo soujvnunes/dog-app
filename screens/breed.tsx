@@ -6,7 +6,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { SafeAreaView } from "../components";
 import { Collections } from "../config";
 import { Tape } from "../containers";
-import { Breed as BreedTree } from "../providers";
+import useBreed from "../hooks/useBreed";
 
 const styles = StyleSheet.create({
   image: {
@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
 
 export default function Breed() {
   const navigation = useNavigation();
-  const { data } = BreedTree.Consumer();
+  const { breed } = useBreed();
   const renderTapes = [
-    { icon: "weight", primary: "weight", secondary: `${data.weight} kg` },
+    { icon: "weight", primary: "weight", secondary: `${breed.weight} kg` },
     {
       icon: "lifeSpan",
       primary: "life span",
-      secondary: data.lifeSpan,
+      secondary: breed.lifeSpan,
     },
   ].map(({ icon, primary, secondary }) => (
     <Tape
@@ -43,10 +43,8 @@ export default function Breed() {
   ));
 
   useEffect(() => {
-    navigation.setOptions({ title: data.name });
-  }, [data]);
-
-  console.log(data);
+    navigation.setOptions({ title: breed.name });
+  }, [breed]);
 
   return (
     <ScrollView>
@@ -54,15 +52,28 @@ export default function Breed() {
         <Image
           style={styles.image}
           source={{
-            uri: data.uri,
+            uri: breed.uri,
           }}
         />
         {renderTapes}
         <Text style={styles.text}>
-          The {data.name} breed is kind of {data.temperament.toLowerCase()}
-          {data.bredFor
-            ? `, being able for ${data.bredFor.toLowerCase()}.`
-            : "."}
+          The <Text style={{ fontWeight: "bold" }}>{breed.name}</Text> breed has
+          a{" "}
+          <Text style={{ fontWeight: "bold" }}>
+            {breed.temperament.toLowerCase()}
+          </Text>{" "}
+          way
+          {breed.bredFor ? (
+            <>
+              , being able for{" "}
+              <Text style={{ fontWeight: "bold" }}>
+                {breed.bredFor.toLowerCase()}
+              </Text>
+              .
+            </>
+          ) : (
+            "."
+          )}
         </Text>
       </SafeAreaView>
     </ScrollView>

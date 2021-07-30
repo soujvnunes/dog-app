@@ -4,24 +4,22 @@ import { useEffect, useRef, useState } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { Grid, GridItem, SafeAreaView } from "../components";
 import { Api } from "../config";
-import { Box, Filter } from "../containers";
-import { Breed } from "../providers";
+import { Box } from "../containers";
+import useBreed from "../hooks/useBreed";
 
 export default function Home() {
   const [breeds, setBreeds] = useState<any>([]);
   const isMounted = useRef<any>();
   const navigation = useNavigation();
-  const { handleSet } = Breed.Consumer();
+  const { setBreed } = useBreed();
 
   useEffect(() => {
     (async function getBreed() {
       isMounted.current = true;
 
-      if (!isMounted.current) {
-        return null;
+      if (isMounted.current) {
+        setBreeds(await Api.getBreed());
       }
-
-      setBreeds(await Api.getBreed());
     })();
 
     return () => {
@@ -30,7 +28,7 @@ export default function Home() {
   }, []);
   function handlePressBox(breed: any) {
     navigation.navigate("Breed");
-    handleSet({
+    setBreed({
       name: breed.name,
       uri: breed.image.url,
       weight: breed.weight.metric,

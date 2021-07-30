@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Breed as BreedScreen, Home } from "./screens";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { BackButton, Filter } from "./containers";
-import { Breed } from "./providers";
+import { Provider as BreedProvider } from "./hooks/useBreed";
 import { Collections } from "./config";
 
 const Stack = createStackNavigator();
@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 export default function App(): JSX.Element {
   return (
     <SafeAreaProvider>
-      <Breed.Provider>
+      <BreedProvider>
         <NavigationContainer>
           <StatusBar style="auto" />
           <Stack.Navigator
@@ -35,7 +35,7 @@ export default function App(): JSX.Element {
             <Stack.Screen name="Breed" component={BreedScreen} />
           </Stack.Navigator>
         </NavigationContainer>
-      </Breed.Provider>
+      </BreedProvider>
     </SafeAreaProvider>
   );
 }
